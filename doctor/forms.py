@@ -9,14 +9,14 @@ from doctor.models import (Doctor,Patient, Make_appointment, Validate_appointmen
 class DoctorSignUpForm(forms.ModelForm):
     class Meta:
         model = Doctor
-        fields = ('username', 'email', 'password', 'phone_no', 'gender', 'year', 'month', 'date', 'specialities', 'education'
-        ,'hospitals', 'rate')
+        fields = ('username', 'email', 'gender', 'year', 'month', 'date', 'specialities', 'education'
+        ,'hospitals', 'rate', 'description' ,'port')
 
 
 class PatientSignUpForm(forms.ModelForm):
     class Meta:
         model = Patient
-        fields = ('username', 'email', 'password', 'gender', 'year', 'month', 'date', 'age')
+        fields = ('username', 'email', 'gender', 'year', 'month', 'date', 'age', 'port')
 
 
 

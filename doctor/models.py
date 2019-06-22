@@ -1,18 +1,20 @@
 from django.db import models
+gender_choice = [('MALE', 'male'), ('female', 'FEMALE')]
+
 
 class Doctor(models.Model):
     username = models.CharField(max_length=500)
-    password = models.CharField(max_length=50)
     gender = models.CharField(max_length=50)
     year = models.IntegerField()
     month = models.CharField(max_length=50)
     date = models.CharField(max_length= 50)
     specialities = models.CharField(max_length=1000)
     education = models.CharField(max_length=1000)
-    hospitals = models.CharField(max_length=1000)
+    hospitals = models.CharField(max_length=1000, null =True)
     rate = models.FloatField()
     email = models.EmailField(unique=True)
-    phone_no = models.CharField(max_length=20)
+    description = models.TextField()
+    port = models.IntegerField()
 
 
 class Patient(models.Model):
@@ -24,6 +26,7 @@ class Patient(models.Model):
     date = models.CharField(max_length=200)
     gender = models.CharField(max_length=20)
     age = models.IntegerField()
+    port = models.IntegerField()
 
 
 class Make_appointment(models.Model):
@@ -73,7 +76,7 @@ class CreatePrescription(models.Model):
     patient = models.EmailField(max_length=100)
 
 
- 
+
 
 
 
