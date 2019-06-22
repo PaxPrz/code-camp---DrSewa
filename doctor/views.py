@@ -95,14 +95,14 @@ def doctor_login(request):
             if user.is_active:
                 login(request, user)
                 messages.success(request, 'Login Successful')
-                return redirect('doctor_login')
+                return redirect('doctorpage')
             else:
                 messages.warning(request, 'Sorry, You are not active.')
                 return redirect('doctor_signup')
 
         else:
             messages.error(request, 'Sorry Recheck your username or password')
-            return redirect('doctor_signup')
+            return redirect('doctor_login')
 
 
 def doctor_logout(request):
@@ -157,9 +157,9 @@ def patient_login(request):
         email = request.POST.get('email')
         port = request.POST.get('port')
 
-        #user = authenticate(username=username, password=password, email=email)
 
-        output = requests.get('http://localhost:3000/api/Doctor', headers={"content-type": "application/json"}, data=patient_dict_json)
+        output = requests.get('http://localhost:3000/api/Doctor', headers={"content-type": "application/json",})
+        user = authenticate(username=username, password=password, email=email)
 
         if user:
             if user.is_active:
@@ -254,3 +254,14 @@ def prescription(request):
         if prescription.is_valid():
             prescription.save()
             return HttpResponse('Saved successfully!')
+
+
+
+def doctorpage(request):
+    if request.method == 'GET':
+        patient = PatientSignUpForm()
+        appointment = Make_appointment_form()
+        report = CreateReport_form()
+        prescription = Prescription_form()
+        return render(request, 'doctorpage.html', {'patient':patient, 'appointment':appointment, 'report':report,
+                                                   'prescription':prescription})
